@@ -1,6 +1,31 @@
 import sys
 import configargparse
 
+TRUE_STRINGS = ('true', 't', 'yes', 'y', '1')
+
+
+def str_to_bool(v):
+    """ Convert a string to boolean value.
+
+    Returns True if the string is in TRUE_STRINGS
+    and False otherwise.  The comparison is done after
+    converting the string to lowercase.
+
+    Notes
+    -----
+    I don't know what happens if the string is unicode.
+
+    Parameters
+    ----------
+    v : str
+        string to convert to boolean value
+
+    Returns
+    -------
+    bool : boolean representation
+    """
+    return v.lower() in TRUE_STRINGS
+
 
 class Defaults(object):
     """ Manages the default values for class parameters.
@@ -109,6 +134,8 @@ class _ConfigParser(object):
             description=description,
             args_for_setting_config_path = ['-c','--conf'],
             formatter_class=configargparse.ArgumentDefaultsHelpFormatter)
+
+        parser.register('type', 'bool', str_to_bool)
 
         parser.add_argument("-w", metavar='filename', nargs='?', const=sys.stdout, type=configargparse.FileType('w'),
             help="write out config file and exit",is_write_out_config_file_arg=True)
