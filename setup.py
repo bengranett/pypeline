@@ -72,7 +72,11 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['configargparseb']
+    install_requires=['configargparseb'],
+
+    dependency_links=[
+        'git+https://github.com/bengranett/ConfigArgParseB.git@release#egg=ConfigArgParseB',
+    ]
 
     # # List additional groups of dependencies here (e.g. development
     # # dependencies). You can install these using the following syntax,
